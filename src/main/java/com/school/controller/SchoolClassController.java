@@ -6,7 +6,9 @@ import com.school.service.SchoolClassServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("schoolClass")
@@ -26,6 +28,18 @@ public class SchoolClassController {
         }
     }
 
+    @PutMapping("{id}")
+    public Map<String, String> update(@RequestBody SchoolClass schoolClass, @PathVariable String id) throws ResponseException {
+        Map<String, String> responseMap = new HashMap<>();
+        try {
+            schoolClassService.update(schoolClass, id);
+            responseMap.put("id", id);
+        } catch (Exception e) {
+            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return responseMap;
+    }
+
     @GetMapping("{schoolClassId}")
     public SchoolClass getById(@PathVariable String schoolClassId) {
         return schoolClassService.findById(schoolClassId);
@@ -40,19 +54,10 @@ public class SchoolClassController {
         }
     }
 
-//    @GetMapping
-//    public List<SchoolClass> findAllSorted(@RequestParam(required = false, defaultValue = "ASC") String direction, @RequestParam(defaultValue = "id") String... properties) throws ResponseException {
-//        try {
-//            return schoolClassService.findAllSorted(direction, properties);
-//        } catch (Exception e) {
-//            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
-//        }
-//    }
-
     @GetMapping
-    public List<SchoolClass> findAll() throws ResponseException {
+    public List<SchoolClass> findAllSorted(@RequestParam(required = false, defaultValue = "ASC") String direction, @RequestParam(defaultValue = "id") String... properties) throws ResponseException {
         try {
-            return schoolClassService.findAll();
+            return schoolClassService.findAllSorted(direction, properties);
         } catch (Exception e) {
             throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
