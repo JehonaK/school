@@ -1,4 +1,4 @@
-package com.school.exeption;
+package com.school.exception;
 
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;

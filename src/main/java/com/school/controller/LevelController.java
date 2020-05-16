@@ -1,7 +1,7 @@
 package com.school.controller;
 
 import com.school.entity.Level;
-import com.school.exeption.ResponseException;
+import com.school.exception.ResponseException;
 import com.school.service.LevelServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
