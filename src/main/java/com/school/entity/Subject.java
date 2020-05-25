@@ -22,4 +22,5 @@ public class Subject extends BaseEntity<String>{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "level_id")
     private Level level;
+
 }

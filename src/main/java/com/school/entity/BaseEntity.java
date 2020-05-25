@@ -31,4 +31,13 @@ public abstract class BaseEntity<T> {
 
     @Column(length = 1000)
     private String note;
+
+    public BaseEntity() {
+
+    }
+
+    public BaseEntity(T id) {
+        this.id = id;
+    }
+
 }

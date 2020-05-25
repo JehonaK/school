@@ -54,8 +54,6 @@ public class BaseServiceImpl<T extends BaseEntity<U>, U> {
         if (t == null) {
             throw new NotFoundException("Entity not found" + t);
         }
-
-        t.setRecordStatus(RecordStatus.INACTIVE);
     }
 
     public T findById(U u) {
@@ -65,7 +63,6 @@ public class BaseServiceImpl<T extends BaseEntity<U>, U> {
         Optional<T> optionalT = baseRepository.findById(u);
 
         return optionalT.orElse(null);
-
     }
 
     public List<T> findAllSorted(String direction, String... properties) {
@@ -88,4 +85,5 @@ public class BaseServiceImpl<T extends BaseEntity<U>, U> {
         String[] result = new String[emptyNames.size()];
         return emptyNames.toArray(result);
     }
+
 }

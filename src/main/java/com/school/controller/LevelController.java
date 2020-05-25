@@ -19,6 +19,11 @@ public class LevelController {
         this.levelServiceImpl = levelService;
     }
 
+    @GetMapping
+    public List<Level> getLevelsBySchoolId(@RequestParam("schoolId") String schoolId) {
+        return levelServiceImpl.getLevelsBySchoolId(schoolId);
+    }
+
     @PostMapping
     public Level create(@RequestBody Level level){
         try {
@@ -54,12 +59,4 @@ public class LevelController {
         }
     }
 
-    @GetMapping
-    public List<Level> findAllSorted(@RequestParam(required = false, defaultValue = "ASC") String direction, @RequestParam(defaultValue = "id") String... properties) throws ResponseException {
-        try {
-            return levelServiceImpl.findAllSorted(direction, properties);
-        } catch (Exception e) {
-            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
 }

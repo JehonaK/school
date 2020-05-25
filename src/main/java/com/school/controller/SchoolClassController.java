@@ -1,5 +1,6 @@
 package com.school.controller;
 
+import com.school.dto.StudentToClassAssignmentDto;
 import com.school.entity.SchoolClass;
 import com.school.exception.ResponseException;
 import com.school.service.SchoolClassServiceImpl;
@@ -45,6 +46,11 @@ public class SchoolClassController {
         return schoolClassService.findById(schoolClassId);
     }
 
+    @GetMapping
+    public List<SchoolClass> getSchoolClassesByLevelId(@RequestParam("levelId") String levelId) {
+        return schoolClassService.getSchoolClassesByLevelId(levelId);
+    }
+
     @DeleteMapping("{id}")
     public void remove(@PathVariable String id) throws ResponseException {
         try {
@@ -54,12 +60,9 @@ public class SchoolClassController {
         }
     }
 
-    @GetMapping
-    public List<SchoolClass> findAllSorted(@RequestParam(required = false, defaultValue = "ASC") String direction, @RequestParam(defaultValue = "id") String... properties) throws ResponseException {
-        try {
-            return schoolClassService.findAllSorted(direction, properties);
-        } catch (Exception e) {
-            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    @PostMapping("student")
+    public void addStudentToClass(@RequestBody StudentToClassAssignmentDto assignmentDto) {
+        schoolClassService.assignStudentToClass(assignmentDto);
     }
+
 }

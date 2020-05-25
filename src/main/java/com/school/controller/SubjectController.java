@@ -1,5 +1,6 @@
 package com.school.controller;
 
+import com.school.dto.TeacherToSubjectAssignmentDto;
 import com.school.entity.Subject;
 import com.school.exception.ResponseException;
 import com.school.service.SubjectServiceImpl;
@@ -13,6 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("subject")
 public class SubjectController {
+
     private SubjectServiceImpl subjectServiceImpl;
 
     public SubjectController(SubjectServiceImpl subjectService) {
@@ -45,6 +47,11 @@ public class SubjectController {
         return subjectServiceImpl.findById(subjectId);
     }
 
+    @GetMapping
+    public List<Subject> getSubjectsByLevelId(@RequestParam("levelId") String levelId) {
+        return subjectServiceImpl.getSubjectsByLevelId(levelId);
+    }
+
     @DeleteMapping("{id}")
     public void remove(@PathVariable String id) throws ResponseException {
         try {
@@ -54,12 +61,18 @@ public class SubjectController {
         }
     }
 
-    @GetMapping
-    public List<Subject> findAllSorted(@RequestParam(required = false, defaultValue = "ASC") String direction, @RequestParam(defaultValue = "id") String... properties) throws ResponseException {
-        try {
-            return subjectServiceImpl.findAllSorted(direction, properties);
-        } catch (Exception e) {
-            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    @PutMapping("assignment")
+    public void assignTeacherToSubject(@RequestBody TeacherToSubjectAssignmentDto assignmentDto) {
+        subjectServiceImpl.assignTeacherToSubject(assignmentDto);
     }
+
+//    @GetMapping
+//    public List<Subject> findAllSorted(@RequestParam(required = false, defaultValue = "ASC") String direction, @RequestParam(defaultValue = "id") String... properties) throws ResponseException {
+//        try {
+//            return subjectServiceImpl.findAllSorted(direction, properties);
+//        } catch (Exception e) {
+//            throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
+//        }
+//    }
+
 }
