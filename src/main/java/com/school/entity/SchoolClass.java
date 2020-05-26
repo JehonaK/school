@@ -9,8 +9,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class SchoolClass extends BaseEntity<String>{
     private String name;
@@ -22,6 +20,37 @@ public class SchoolClass extends BaseEntity<String>{
 
     @OneToMany(mappedBy = "school_class_id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<User> students;
+
+    public SchoolClass(String id, String name, ClassStatus classStatus, Level level) {
+        super(id);
+        this.name = name;
+        this.classStatus = classStatus;
+        this.level = level;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ClassStatus getClassStatus() {
+        return classStatus;
+    }
+
+    public void setClassStatus(ClassStatus classStatus) {
+        this.classStatus = classStatus;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
 
     public List<User> getStudents() {
         return students;

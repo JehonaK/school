@@ -8,8 +8,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Level extends BaseEntity<String>{
 
@@ -24,6 +22,12 @@ public class Level extends BaseEntity<String>{
 
     @OneToMany(mappedBy = "level", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Subject> subjects;
+
+    public Level(String id, String name, School school) {
+        super(id);
+        this.name = name;
+        this.school = school;
+    }
 
     public String getName() {
         return name;
