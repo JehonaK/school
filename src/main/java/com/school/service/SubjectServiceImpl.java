@@ -38,7 +38,10 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject, String> impleme
     @Override
     public void assignTeacherToSubject(TeacherToSubjectAssignmentDto assignmentDto) {
         Subject subject = findById(assignmentDto.getSubjectId());
-        List<SchoolClass> schoolClasses = schoolClassService.getBatchOfSchoolClasses(assignmentDto.getSchoolClassIdList());
+        List<SchoolClass> schoolClasses = new ArrayList<>();
+        for(String schoolClassId : assignmentDto.getSchoolClassIdList()) {
+            schoolClasses.add(schoolClassService.findById(schoolClassId));
+        }
         User teacher = userService.findUserByEmail(assignmentDto.getEmail());
         String courseName = subject.getName() + " - " + subject.getLevel();
         List<User> students = new ArrayList<>();

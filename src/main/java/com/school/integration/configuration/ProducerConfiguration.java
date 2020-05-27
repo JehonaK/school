@@ -13,14 +13,20 @@ import org.springframework.context.annotation.Configuration;
 public class ProducerConfiguration {
 
     @Bean
-    public MessageConverter messageConverter() {
+    public MessageConverter messageConverterProducer() {
         return new Jackson2JsonMessageConverter();
     }
+
+//    private MessageConverter messageConverter;
+//
+//    public ProducerConfiguration(MessageConverter messageConverter) {
+//        this.messageConverter = messageConverter;
+//    }
 
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(messageConverter());
+        rabbitTemplate.setMessageConverter(messageConverterProducer());
         return rabbitTemplate;
     }
 

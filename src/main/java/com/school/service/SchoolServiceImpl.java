@@ -1,5 +1,6 @@
 package com.school.service;
 
+import com.school.PerRequestIdStorage;
 import com.school.entity.School;
 import com.school.entity.User;
 import com.school.repository.BaseRepository;
@@ -16,6 +17,13 @@ public class SchoolServiceImpl extends BaseServiceImpl<School, String> implement
         super(baseRepository);
         this.schoolRepository = schoolRepository;
         this.userService = userService;
+    }
+
+    @Override
+    public School save(School school) {
+        User schoolAdmin = userService.findById("123"); // id storage
+        school.setSchoolAdmin(schoolAdmin);
+        return super.save(school);
     }
 
     @Override

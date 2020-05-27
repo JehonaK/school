@@ -1,8 +1,8 @@
 package com.school.controller;
 
 import com.school.entity.School;
+import com.school.entity.User;
 import com.school.exception.ResponseException;
-import com.school.service.SchoolService;
 import com.school.service.SchoolServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -5,13 +5,17 @@ import lombok.*;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.sql.Timestamp;
 
 @MappedSuperclass
 @Data
-@NoArgsConstructor
 public abstract class BaseEntity<T> {
+
     @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id", columnDefinition = "NVARCHAR(36)")
     private T id;
 
     @Enumerated(EnumType.STRING)

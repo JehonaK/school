@@ -1,5 +1,7 @@
 package com.school.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,20 +11,35 @@ import java.sql.Date;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class School extends BaseEntity<String>{
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "city")
     private String city;
+
+    @Column(name = "school_type")
     private String schoolType;
+
+    @Column(name = "school_creation_date")
     private Date schoolCreationDate;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "school_admin")
     private User schoolAdmin;
 
-    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Level> levels;
+
+    public School() {
+
+    }
 
     public School(String id, String name, String address, String city, String schoolType, Date schoolCreationDate, User schoolAdmin) {
         super(id);

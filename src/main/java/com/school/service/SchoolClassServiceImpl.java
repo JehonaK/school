@@ -7,6 +7,7 @@ import com.school.entity.User;
 import com.school.integration.models.SerializableNotification;
 import com.school.integration.producers.NotificationProducer;
 import com.school.repository.BaseRepository;
+import com.school.repository.SchoolClassRepository;
 import com.school.repository.SchoolRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,19 +22,21 @@ public class SchoolClassServiceImpl extends BaseServiceImpl<SchoolClass, String>
     private UserServiceImpl userService;
     private LevelServiceImpl levelService;
     private NotificationProducer notificationProducer;
+    private SchoolClassRepository schoolClassRepository;
 
     public SchoolClassServiceImpl(BaseRepository<SchoolClass, String> baseRepository, SchoolRepository schoolRepository, UserServiceImpl userService,
-                                  LevelServiceImpl levelService, NotificationProducer notificationProducer) {
+                                  LevelServiceImpl levelService, NotificationProducer notificationProducer, SchoolClassRepository schoolClassRepository) {
         super(baseRepository);
         this.schoolRepository = schoolRepository;
         this.userService = userService;
         this.levelService = levelService;
         this.notificationProducer = notificationProducer;
+        this.schoolClassRepository = schoolClassRepository;
     }
 
     @Override
     public List<SchoolClass> getBatchOfSchoolClasses(List<String> schoolClassIdList) {
-        return schoolRepository.getBatchOfSchoolClasses(schoolClassIdList);
+        return schoolClassRepository.getBatchOfSchoolClasses(schoolClassIdList);
     }
 
     @Override

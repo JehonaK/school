@@ -1,5 +1,6 @@
 package com.school.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.school.type.ClassStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,15 +12,24 @@ import java.util.List;
 @Data
 @Entity
 public class SchoolClass extends BaseEntity<String>{
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "class_status")
     private ClassStatus classStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "level_id")
     private Level level;
 
-    @OneToMany(mappedBy = "school_class_id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "schoolClassId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<User> students;
+
+    public SchoolClass() {
+
+    }
 
     public SchoolClass(String id, String name, ClassStatus classStatus, Level level) {
         super(id);

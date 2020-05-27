@@ -1,19 +1,38 @@
 package com.school.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import org.hibernate.boot.jaxb.hbm.internal.CacheAccessTypeConverter;
+
 import javax.persistence.*;
 
+@Data
 @Entity
-@Table(name = "user")
 public class User extends BaseEntity<String> {
 
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "role")
     private String role;
+
+    @OneToOne(mappedBy = "schoolAdmin", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private School school;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_class_id")
     private SchoolClass schoolClassId;
+
+    public User() {
+
+    }
 
     public User(String id, String firstName, String lastName, String email, String role) {
         super(id);
