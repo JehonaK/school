@@ -18,6 +18,7 @@ public class Level extends BaseEntity<String>{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id")
+    @JsonIgnore
     private School school;
 
     @JsonIgnore

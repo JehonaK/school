@@ -21,6 +21,7 @@ public class SchoolClass extends BaseEntity<String>{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "level_id")
+    @JsonIgnore
     private Level level;
 
     @JsonIgnore
@@ -70,4 +71,12 @@ public class SchoolClass extends BaseEntity<String>{
         this.students = students;
     }
 
+    @Override
+    public String toString() {
+        return "SchoolClass{" +
+                "name='" + name + '\'' +
+                ", classStatus=" + classStatus +
+                ", students=" + students +
+                '}';
+    }
 }

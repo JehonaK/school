@@ -107,4 +107,16 @@ public class School extends BaseEntity<String>{
         this.levels = levels;
     }
 
+    @Override
+    public String toString() {
+        return "School{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", schoolType='" + schoolType + '\'' +
+                ", schoolCreationDate=" + schoolCreationDate +
+                ", schoolAdmin=" + schoolAdmin +
+                ", levels=" + levels +
+                '}';
+    }
 }

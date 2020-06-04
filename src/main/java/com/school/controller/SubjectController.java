@@ -1,6 +1,8 @@
 package com.school.controller;
 
+import com.school.dto.SubjectDto;
 import com.school.dto.TeacherToSubjectAssignmentDto;
+import com.school.dto.mapper.SubjectObjectMapper;
 import com.school.entity.Subject;
 import com.school.exception.ResponseException;
 import com.school.service.SubjectServiceImpl;
@@ -22,29 +24,26 @@ public class SubjectController {
     }
 
     @PostMapping
-    public Subject create(@RequestBody Subject subject){
+    public Subject create(@RequestBody SubjectDto subjectDto) {
         try {
-            return subjectServiceImpl.save(subject);
+            return subjectServiceImpl.createSubject(subjectDto);
         } catch (Exception e) {
             throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("{id}")
-    public Map<String, String> update(@RequestBody Subject subject, @PathVariable String id) throws ResponseException {
-        Map<String, String> responseMap = new HashMap<>();
+    public Subject update(@RequestBody Subject subject, @PathVariable String id) throws ResponseException {
         try {
-            subjectServiceImpl.update(subject, id);
-            responseMap.put("id", id);
+            return subjectServiceImpl.update(subject, id);
         } catch (Exception e) {
             throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        return responseMap;
     }
 
     @GetMapping("{subjectId}")
-    public Subject getById(@PathVariable String subjectId) {
-        return subjectServiceImpl.findById(subjectId);
+    public SubjectDto getById(@PathVariable String subjectId) {
+        return SubjectObjectMapper.toDto(subjectServiceImpl.findById(subjectId));
     }
 
     @GetMapping

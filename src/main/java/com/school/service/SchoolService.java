@@ -4,6 +4,6 @@ import com.school.entity.School;
 
 public interface SchoolService {
 
-    School getSchoolBySchoolAdminId(String schoolAdminId);
+    School getSchoolBySchoolAdminId();
 
 }

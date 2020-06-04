@@ -1,5 +1,6 @@
 package com.school.controller;
 
+import com.school.dto.LevelDto;
 import com.school.entity.Level;
 import com.school.exception.ResponseException;
 import com.school.service.LevelServiceImpl;
@@ -25,19 +26,19 @@ public class LevelController {
     }
 
     @PostMapping
-    public Level create(@RequestBody Level level){
+    public Level create(@RequestBody LevelDto levelDto) {
         try {
-            return levelServiceImpl.save(level);
+            return levelServiceImpl.createLevel(levelDto);
         } catch (Exception e) {
             throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("{id}")
-    public Map<String, String> update(@RequestBody Level level, @PathVariable String id) throws ResponseException {
+    public Map<String, String> update(@RequestBody LevelDto levelDto, @PathVariable String id) throws ResponseException {
         Map<String, String> responseMap = new HashMap<>();
         try {
-            levelServiceImpl.update(level, id);
+            levelServiceImpl.update(levelDto, id);
             responseMap.put("id", id);
         } catch (Exception e) {
             throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);

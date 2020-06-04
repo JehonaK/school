@@ -1,15 +1,16 @@
 package com.school.controller;
 
+import com.school.dto.SchoolClassDto;
 import com.school.dto.StudentToClassAssignmentDto;
+import com.school.dto.mapper.SchoolClassObjectMapper;
 import com.school.entity.SchoolClass;
+import com.school.entity.User;
 import com.school.exception.ResponseException;
 import com.school.service.SchoolClassServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("schoolClass")
@@ -21,29 +22,26 @@ public class SchoolClassController {
     }
 
     @PostMapping
-    public SchoolClass create(@RequestBody SchoolClass schoolClass) {
-        try{
-            return schoolClassService.save(schoolClass);
+    public SchoolClass create(@RequestBody SchoolClassDto schoolClassDto) {
+        try {
+            return schoolClassService.create(schoolClassDto);
         } catch (Exception e) {
             throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("{id}")
-    public Map<String, String> update(@RequestBody SchoolClass schoolClass, @PathVariable String id) throws ResponseException {
-        Map<String, String> responseMap = new HashMap<>();
+    public SchoolClass update(@RequestBody SchoolClass schoolClass, @PathVariable String id) throws ResponseException {
         try {
-            schoolClassService.update(schoolClass, id);
-            responseMap.put("id", id);
+            return schoolClassService.update(schoolClass, id);
         } catch (Exception e) {
             throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        return responseMap;
     }
 
     @GetMapping("{schoolClassId}")
-    public SchoolClass getById(@PathVariable String schoolClassId) {
-        return schoolClassService.findById(schoolClassId);
+    public SchoolClassDto getById(@PathVariable String schoolClassId) {
+        return SchoolClassObjectMapper.toDto(schoolClassService.findById(schoolClassId));
     }
 
     @GetMapping
@@ -61,8 +59,8 @@ public class SchoolClassController {
     }
 
     @PostMapping("student")
-    public void addStudentToClass(@RequestBody StudentToClassAssignmentDto assignmentDto) {
-        schoolClassService.assignStudentToClass(assignmentDto);
+    public User addStudentToClass(@RequestBody StudentToClassAssignmentDto assignmentDto) {
+        return schoolClassService.assignStudentToClass(assignmentDto);
     }
 
 }

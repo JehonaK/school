@@ -21,8 +21,8 @@ public class SchoolController {
     }
 
     @GetMapping
-    public School getSchoolBySchoolAdminId(@RequestParam("schoolAdminId") String schoolAdminId) {
-        return schoolService.getSchoolBySchoolAdminId(schoolAdminId);
+    public School getSchoolBySchoolAdminId() {
+        return schoolService.getSchoolBySchoolAdminId();
     }
 
     @PostMapping

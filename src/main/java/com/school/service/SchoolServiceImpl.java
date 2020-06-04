@@ -21,15 +21,24 @@ public class SchoolServiceImpl extends BaseServiceImpl<School, String> implement
 
     @Override
     public School save(School school) {
-        User schoolAdmin = userService.findById("123"); // id storage
+        User schoolAdmin = userService.findById(PerRequestIdStorage.getUserId()); // id storage
         school.setSchoolAdmin(schoolAdmin);
         return super.save(school);
     }
 
     @Override
-    public School getSchoolBySchoolAdminId(String schoolAdminId) {
-        User schoolAdmin = userService.findById(schoolAdminId);
+    public School getSchoolBySchoolAdminId() {
+        User schoolAdmin = userService.findById(PerRequestIdStorage.getUserId());
         return schoolRepository.findBySchoolAdmin(schoolAdmin);
+    }
+
+    public School getSchoolBySchoolId(String schoolId) {
+        return schoolRepository.findById(schoolId).orElse(null);
+    }
+
+    @Override
+    public void remove(String id){
+        this.schoolRepository.deleteById(id);
     }
 
 }

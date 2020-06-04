@@ -1,5 +1,6 @@
 package com.school.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.school.type.SubjectType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Subject extends BaseEntity<String>{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "level_id")
+    @JsonIgnore
     private Level level;
 
     public Subject() {
