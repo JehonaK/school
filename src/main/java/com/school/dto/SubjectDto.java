@@ -3,11 +3,10 @@ package com.school.dto;
 import com.school.entity.SchoolClass;
 import com.school.type.SubjectType;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class SubjectDto extends DtoEntity{
-
-    private String id;
 
     private String name;
 
@@ -20,6 +19,20 @@ public class SubjectDto extends DtoEntity{
     private SubjectType subjectType;
 
     private List<SchoolClassDto> schoolClasses;
+
+    public SubjectDto(String id, Timestamp createDateTime) {
+        super(id, createDateTime);
+    }
+
+    public SubjectDto(String id, Timestamp createDateTime, String name, String levelId, String levelName, String description, SubjectType subjectType, List<SchoolClassDto> schoolClasses) {
+        super(id, createDateTime);
+        this.name = name;
+        this.levelId = levelId;
+        this.levelName = levelName;
+        this.description = description;
+        this.subjectType = subjectType;
+        this.schoolClasses = schoolClasses;
+    }
 
     public String getName() {
         return name;
@@ -59,14 +72,6 @@ public class SubjectDto extends DtoEntity{
 
     public void setLevelName(String levelName) {
         this.levelName = levelName;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public List<SchoolClassDto> getSchoolClasses() {

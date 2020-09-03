@@ -29,12 +29,12 @@ public class School extends BaseEntity<String>{
     @Column(name = "school_creation_date")
     private Date schoolCreationDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "school_admin")
     private User schoolAdmin;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "school", fetch = FetchType.LAZY)
     private List<Level> levels;
 
     public School() {

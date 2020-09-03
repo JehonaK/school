@@ -22,11 +22,11 @@ public class Level extends BaseEntity<String>{
     private School school;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "level", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "level", fetch = FetchType.LAZY)
     private List<SchoolClass> schoolClasses;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "level", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "level", fetch = FetchType.LAZY)
     private List<Subject> subjects;
 
     public Level() {

@@ -3,28 +3,28 @@ package com.school.dto;
 import com.school.entity.User;
 import com.school.type.ClassStatus;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class SchoolClassDto extends DtoEntity{
 
-    private String id;
-
     private String name;
-
     private ClassStatus classStatus;
-
     private String levelId;
-
     private String levelName;
+    private List<UserDto> students;
 
-    private List<User> students;
-
-    public String getId() {
-        return id;
+    public SchoolClassDto(String id, Timestamp createDateTime) {
+        super(id, createDateTime);
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public SchoolClassDto(String id, Timestamp createDateTime, String name, ClassStatus classStatus, String levelId, String levelName, List<UserDto> students) {
+        super(id, createDateTime);
+        this.name = name;
+        this.classStatus = classStatus;
+        this.levelId = levelId;
+        this.levelName = levelName;
+        this.students = students;
     }
 
     public String getName() {
@@ -59,11 +59,12 @@ public class SchoolClassDto extends DtoEntity{
         this.levelName = levelName;
     }
 
-    public List<User> getStudents() {
+    public List<UserDto> getStudents() {
         return students;
     }
 
-    public void setStudents(List<User> students) {
+    public void setStudents(List<UserDto> students) {
         this.students = students;
     }
+
 }

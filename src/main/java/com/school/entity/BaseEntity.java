@@ -5,7 +5,6 @@ import lombok.*;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 import java.sql.Timestamp;
 
 @MappedSuperclass
@@ -50,5 +49,9 @@ public abstract class BaseEntity<T> {
 
     public void setId(T id) {
         this.id = id;
+    }
+
+    public Timestamp getCreateDateTime() {
+        return createDateTime;
     }
 }

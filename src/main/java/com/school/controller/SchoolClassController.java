@@ -2,7 +2,7 @@ package com.school.controller;
 
 import com.school.dto.SchoolClassDto;
 import com.school.dto.StudentToClassAssignmentDto;
-import com.school.dto.mapper.SchoolClassObjectMapper;
+import com.school.dto.mapper.SchoolClassMapper;
 import com.school.entity.SchoolClass;
 import com.school.entity.User;
 import com.school.exception.ResponseException;
@@ -41,7 +41,7 @@ public class SchoolClassController {
 
     @GetMapping("{schoolClassId}")
     public SchoolClassDto getById(@PathVariable String schoolClassId) {
-        return SchoolClassObjectMapper.toDto(schoolClassService.findById(schoolClassId));
+        return SchoolClassMapper.toDto(schoolClassService.findById(schoolClassId));
     }
 
     @GetMapping

@@ -22,7 +22,7 @@ public class User extends BaseEntity<String> {
     @Column(name = "role")
     private String role;
 
-    @OneToOne(mappedBy = "schoolAdmin", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "schoolAdmin", fetch = FetchType.LAZY)
     @JsonIgnore
     private School school;
 

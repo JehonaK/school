@@ -25,7 +25,7 @@ public class SchoolClass extends BaseEntity<String>{
     private Level level;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "schoolClassId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "schoolClassId", fetch = FetchType.LAZY)
     private List<User> students;
 
     public SchoolClass() {

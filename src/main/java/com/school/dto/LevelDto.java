@@ -1,17 +1,26 @@
 package com.school.dto;
 
-import com.school.entity.SchoolClass;
-
+import java.sql.Timestamp;
 import java.util.List;
 
 public class LevelDto extends DtoEntity {
 
     private String name;
+    private SchoolDto school;
+    private List<SchoolClassDto> schoolClasses;
+    private List<SubjectDto> subjects;
 
-    private String schoolId;
+    public LevelDto(String id, Timestamp createDateTime) {
+        super(id, createDateTime);
+    }
 
-    private List<SchoolClass> schoolClasses;
-
+    public LevelDto(String id, Timestamp createDateTime, String name, SchoolDto school, List<SchoolClassDto> schoolClasses, List<SubjectDto> subjects) {
+        super(id, createDateTime);
+        this.name = name;
+        this.school = school;
+        this.schoolClasses = schoolClasses;
+        this.subjects = subjects;
+    }
 
     public String getName() {
         return name;
@@ -21,19 +30,28 @@ public class LevelDto extends DtoEntity {
         this.name = name;
     }
 
-    public String getSchoolId() {
-        return schoolId;
+    public SchoolDto getSchool() {
+        return school;
     }
 
-    public void setSchoolId(String schoolId) {
-        this.schoolId = schoolId;
+    public void setSchool(SchoolDto school) {
+        this.school = school;
     }
 
-    public List<SchoolClass> getSchoolClasses() {
+    public List<SchoolClassDto> getSchoolClasses() {
         return schoolClasses;
     }
 
-    public void setSchoolClasses(List<SchoolClass> schoolClasses) {
+    public void setSchoolClasses(List<SchoolClassDto> schoolClasses) {
         this.schoolClasses = schoolClasses;
     }
+
+    public List<SubjectDto> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<SubjectDto> subjects) {
+        this.subjects = subjects;
+    }
+
 }

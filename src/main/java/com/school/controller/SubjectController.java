@@ -9,9 +9,7 @@ import com.school.service.SubjectServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("subject")
@@ -43,7 +41,7 @@ public class SubjectController {
 
     @GetMapping("{subjectId}")
     public SubjectDto getById(@PathVariable String subjectId) {
-        return SubjectObjectMapper.toDto(subjectServiceImpl.findById(subjectId));
+        return SubjectObjectMapper.subjectToSubjectDto(subjectServiceImpl.findById(subjectId));
     }
 
     @GetMapping
