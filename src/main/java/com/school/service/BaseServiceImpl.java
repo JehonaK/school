@@ -54,7 +54,7 @@ public class BaseServiceImpl<T extends BaseEntity<U>, U> {
         if (t == null) {
             throw new NotFoundException("Entity not found" + t);
         }
-
+        baseRepository.delete(t);
     }
 
     public T findById(U u) {

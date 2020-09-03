@@ -86,22 +86,4 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject, String> impleme
 
         return subjectRepository.save(subject);
     }
-
-    @Override
-    public void remove(String id) {
-//        Subject subject = this.subjectRepository.findById(id).get();
-//        subject.getLevel().getSubjects().remove(subject);
-//        subject.setLevel(null);
-        subjectRepository.deleteById(id);
-    }
-
-//    @Override
-//    public Subject update(Subject subject, String id) {
-//        Subject old = this.subjectRepository.findById(id).get();
-//        old.setName(subject.getName());
-//        old.setSubjectType(subject.getSubjectType());
-//        old.setDescription(subject.getDescription());
-//
-//        return this.subjectRepository.save(old);
-//    }
 }

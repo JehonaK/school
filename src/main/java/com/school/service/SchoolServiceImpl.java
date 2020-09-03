@@ -39,9 +39,4 @@ public class SchoolServiceImpl extends BaseServiceImpl<School, String> implement
         return schoolRepository.findById(schoolId).orElse(null);
     }
 
-    @Override
-    public void remove(String id){
-        this.schoolRepository.deleteById(id);
-    }
-
 }

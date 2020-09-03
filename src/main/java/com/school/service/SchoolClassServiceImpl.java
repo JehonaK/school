@@ -76,10 +76,13 @@ public class SchoolClassServiceImpl extends BaseServiceImpl<SchoolClass, String>
 
     @Override
     public void remove(String id){
-        SchoolClass old = schoolClassRepository.findById(id).get();
-        old.getLevel().getSchoolClasses().remove(old);
-        old.setLevel(null);
-        this.schoolClassRepository.deleteById(id);
+        SchoolClass old = findById(id);
+        List<User> students = old.getStudents();
+        for (User student : students) {
+            student.setSchoolClassId(null);
+            userService.save(student);
+        }
+        schoolClassRepository.deleteById(id);
     }
 
 }

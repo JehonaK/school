@@ -45,14 +45,6 @@ public class LevelServiceImpl extends BaseServiceImpl<Level, String> implements 
         return levelRepository.save(level);
     }
 
-    @Override
-    public void remove(String id) {
-        Level level = this.levelRepository.findById(id).get();
-        level.getSchool().getLevels().remove(level);
-        level.setSchool(null);
-        this.levelRepository.deleteById(id);
-    }
-
     public Level getLevelById(String levelId) {
         return levelRepository.findById(levelId).orElse(null);
     }
