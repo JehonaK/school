@@ -14,8 +14,8 @@ public class SchoolClassMapper {
 
         schoolClassDto.setClassStatus(schoolClass.getClassStatus());
         schoolClassDto.setName(schoolClass.getName());
+        schoolClassDto.setLevelId(schoolClass.getLevel().getId());
         schoolClassDto.setLevelName(schoolClass.getLevel().getName());
-        schoolClassDto.setLevelId(schoolClass.getLevel().getName());
         schoolClassDto.setId(schoolClass.getId());
         List<UserDto> studentsDto = schoolClass.getStudents().stream().map(UserMapper::userToUserDto).collect(Collectors.toList());
         schoolClassDto.setStudents(studentsDto);

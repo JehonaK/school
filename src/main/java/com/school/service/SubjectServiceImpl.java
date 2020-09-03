@@ -37,12 +37,22 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject, String> impleme
     @Override
     public void assignTeacherToSubject(TeacherToSubjectAssignmentDto assignmentDto) {
         Subject subject = findById(assignmentDto.getSubjectId());
+        if (subject == null) {
+            throw new RuntimeException("Subject not found!");
+        }
         List<SchoolClass> schoolClasses = new ArrayList<>();
         for (String schoolClassId : assignmentDto.getSchoolClassIdList()) {
-            schoolClasses.add(schoolClassService.findById(schoolClassId));
+            SchoolClass schoolClass = schoolClassService.findById(schoolClassId);
+            if (schoolClass == null) {
+                throw new RuntimeException("SchoolClass not found!");
+            }
+            schoolClasses.add(schoolClass);
         }
-        User teacher = userService.findUserByEmail(assignmentDto.getEmail());
-        String courseName = subject.getName() + " - " + subject.getLevel();
+        User teacher = userService.findUserByEmail(assignmentDto.getTeacherEmail());
+        if (teacher == null) {
+            throw new RuntimeException("Teacher not found!");
+        }
+        String courseName = subject.getName() + " - " + subject.getLevel().getName();
         List<User> students = new ArrayList<>();
         for (SchoolClass schoolClass : schoolClasses) {
             students.addAll(schoolClass.getStudents());
@@ -63,8 +73,14 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject, String> impleme
 
     public Subject createSubject(SubjectDto subjectDto) {
         Subject subject = new Subject();
+
         subject.setDescription(subjectDto.getDescription());
-        subject.setLevel(levelService.getLevelById(subjectDto.getLevelId()));
+        Level level = levelService.findById(subjectDto.getLevelId());
+        if (level == null) {
+            throw new RuntimeException("Level not found!");
+        }
+        subject.setLevel(level);
+
         subject.setName(subjectDto.getName());
         subject.setSubjectType(subjectDto.getSubjectType());
 
@@ -73,19 +89,19 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject, String> impleme
 
     @Override
     public void remove(String id) {
-        Subject subject = this.subjectRepository.findById(id).get();
-        subject.getLevel().getSubjects().remove(subject);
-        subject.setLevel(null);
+//        Subject subject = this.subjectRepository.findById(id).get();
+//        subject.getLevel().getSubjects().remove(subject);
+//        subject.setLevel(null);
         subjectRepository.deleteById(id);
     }
 
-    @Override
-    public Subject update(Subject subject, String id) {
-        Subject old = this.subjectRepository.findById(id).get();
-        old.setName(subject.getName());
-        old.setSubjectType(subject.getSubjectType());
-        old.setDescription(subject.getDescription());
-
-        return this.subjectRepository.save(old);
-    }
+//    @Override
+//    public Subject update(Subject subject, String id) {
+//        Subject old = this.subjectRepository.findById(id).get();
+//        old.setName(subject.getName());
+//        old.setSubjectType(subject.getSubjectType());
+//        old.setDescription(subject.getDescription());
+//
+//        return this.subjectRepository.save(old);
+//    }
 }

@@ -5,6 +5,7 @@ import com.school.type.SubjectType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -77,4 +78,8 @@ public class Subject extends BaseEntity<String>{
         this.level = level;
     }
 
+    @Override
+    public String toString() {
+        return "";
+    }
 }

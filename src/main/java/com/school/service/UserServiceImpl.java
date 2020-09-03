@@ -29,10 +29,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
     @Override
     public List<User> getStudentsBySchoolClassId(String schoolClassId) {
-        SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId).orElseThrow(() -> new NoSuchElementException("Class Not found!"));
-        if(schoolClass == null) {
-            throw new NoSuchElementException("School Class with ID " + schoolClassId + " not found!");
-        }
+        SchoolClass schoolClass = schoolClassRepository.findById(schoolClassId).orElseThrow(() -> new NoSuchElementException("SchoolClass Not found!"));
         return schoolClass.getStudents();
     }
 

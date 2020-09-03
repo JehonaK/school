@@ -7,6 +7,8 @@ import com.school.repository.BaseRepository;
 import com.school.repository.SchoolRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+
 @Service
 public class SchoolServiceImpl extends BaseServiceImpl<School, String> implements SchoolService {
 
@@ -21,9 +23,10 @@ public class SchoolServiceImpl extends BaseServiceImpl<School, String> implement
 
     @Override
     public School save(School school) {
-        User schoolAdmin = userService.findById(PerRequestIdStorage.getUserId()); // id storage
+        User schoolAdmin = userService.findById(PerRequestIdStorage.getUserId());
         school.setSchoolAdmin(schoolAdmin);
-        return super.save(school);
+        school.setSchoolCreationDate(new Date(System.currentTimeMillis()));
+        return schoolRepository.save(school);
     }
 
     @Override

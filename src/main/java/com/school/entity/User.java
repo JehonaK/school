@@ -91,4 +91,9 @@ public class User extends BaseEntity<String> {
         this.schoolClassId = schoolClassId;
     }
 
+    @Override
+    public String toString() {
+        return "";
+    }
+
 }

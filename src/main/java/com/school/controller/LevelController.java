@@ -35,10 +35,10 @@ public class LevelController {
     }
 
     @PutMapping("{id}")
-    public Map<String, String> update(@RequestBody LevelDto levelDto, @PathVariable String id) throws ResponseException {
+    public Map<String, String> update(@RequestBody Level level, @PathVariable String id) throws ResponseException {
         Map<String, String> responseMap = new HashMap<>();
         try {
-            levelServiceImpl.update(levelDto, id);
+            levelServiceImpl.update(level, id);
             responseMap.put("id", id);
         } catch (Exception e) {
             throw new ResponseException(e.getMessage(), HttpStatus.BAD_REQUEST);

@@ -9,6 +9,9 @@ public class UserDto extends DtoEntity {
     private String email;
     private String role;
 
+    public UserDto() {
+    }
+
     public UserDto(String id, Timestamp createDateTime) {
         super(id, createDateTime);
     }

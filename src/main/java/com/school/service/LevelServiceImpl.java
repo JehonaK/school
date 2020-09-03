@@ -34,21 +34,15 @@ public class LevelServiceImpl extends BaseServiceImpl<Level, String> implements 
 
     public Level createLevel(LevelDto levelDto) {
         Level level = new Level();
-        level.setSchool(this.schoolService.getSchoolBySchoolId(levelDto.getSchoolId()));
-        level.setName(levelDto.getName());
-        level = levelRepository.save(level);
-        level.setSchoolClasses(levelDto.getSchoolClasses());
-        for (SchoolClass schoolClass : level.getSchoolClasses()) {
-            schoolClass.setLevel(level);
-        }
-        return levelRepository.save(level);
-    }
 
-    public Level update(LevelDto levelDto, String id) {
-        Level level = this.levelRepository.findById(id).get();
-        level.setSchool(this.schoolService.getSchoolBySchoolId(levelDto.getSchoolId()));
+        School school = schoolService.findById(levelDto.getSchool().getId());
+        if (school == null) {
+            throw new RuntimeException("School not found!");
+        }
+        level.setSchool(school);
+
         level.setName(levelDto.getName());
-        return this.levelRepository.save(level);
+        return levelRepository.save(level);
     }
 
     @Override

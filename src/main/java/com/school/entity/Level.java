@@ -71,4 +71,8 @@ public class Level extends BaseEntity<String>{
         this.subjects = subjects;
     }
 
+    @Override
+    public String toString() {
+        return "";
+    }
 }

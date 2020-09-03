@@ -73,10 +73,6 @@ public class SchoolClass extends BaseEntity<String>{
 
     @Override
     public String toString() {
-        return "SchoolClass{" +
-                "name='" + name + '\'' +
-                ", classStatus=" + classStatus +
-                ", students=" + students +
-                '}';
+        return "";
     }
 }

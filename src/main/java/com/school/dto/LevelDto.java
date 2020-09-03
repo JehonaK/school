@@ -10,6 +10,9 @@ public class LevelDto extends DtoEntity {
     private List<SchoolClassDto> schoolClasses;
     private List<SubjectDto> subjects;
 
+    public LevelDto() {
+    }
+
     public LevelDto(String id, Timestamp createDateTime) {
         super(id, createDateTime);
     }

@@ -14,6 +14,9 @@ public class SchoolClassDto extends DtoEntity{
     private String levelName;
     private List<UserDto> students;
 
+    public SchoolClassDto() {
+    }
+
     public SchoolClassDto(String id, Timestamp createDateTime) {
         super(id, createDateTime);
     }

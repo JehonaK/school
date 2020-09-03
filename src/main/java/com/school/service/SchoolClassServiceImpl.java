@@ -2,6 +2,7 @@ package com.school.service;
 
 import com.school.dto.SchoolClassDto;
 import com.school.dto.StudentToClassAssignmentDto;
+import com.school.entity.Level;
 import com.school.entity.SchoolClass;
 import com.school.entity.User;
 import com.school.repository.BaseRepository;
@@ -37,8 +38,14 @@ public class SchoolClassServiceImpl extends BaseServiceImpl<SchoolClass, String>
 
     @Override
     public User assignStudentToClass(StudentToClassAssignmentDto assignmentDto) {
-        User student = userService.findUserByEmail(assignmentDto.getEmail());
+        User student = userService.findUserByEmail(assignmentDto.getStudentEmail());
+        if (student == null) {
+            throw new RuntimeException("Student not found");
+        }
         SchoolClass schoolClass = findById(assignmentDto.getSchoolClassId());
+        if (schoolClass == null) {
+            throw new RuntimeException("SchoolClass not found!");
+        }
         student.setSchoolClassId(schoolClass);
         userService.save(student);
 //        notificationProducer.sendNotification(new SerializableNotification("You have been added to the class" + schoolClass.getName(),
@@ -57,9 +64,14 @@ public class SchoolClassServiceImpl extends BaseServiceImpl<SchoolClass, String>
         SchoolClass schoolClass = new SchoolClass();
         schoolClass.setClassStatus(schoolClassDto.getClassStatus());
         schoolClass.setName(schoolClassDto.getName());
+
+        Level level = levelService.findById(schoolClassDto.getLevelId());
+        if (level == null) {
+            throw new RuntimeException("Level not found!");
+        }
         schoolClass.setLevel(this.levelService.getLevelById(schoolClassDto.getLevelId()));
 
-        return this.schoolClassRepository.save(schoolClass);
+        return schoolClassRepository.save(schoolClass);
     }
 
     @Override

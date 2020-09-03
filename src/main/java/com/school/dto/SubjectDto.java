@@ -9,16 +9,14 @@ import java.util.List;
 public class SubjectDto extends DtoEntity{
 
     private String name;
-
     private String levelId;
-
     private String levelName;
-
     private String description;
-
     private SubjectType subjectType;
-
     private List<SchoolClassDto> schoolClasses;
+
+    public SubjectDto() {
+    }
 
     public SubjectDto(String id, Timestamp createDateTime) {
         super(id, createDateTime);

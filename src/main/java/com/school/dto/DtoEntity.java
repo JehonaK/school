@@ -7,6 +7,9 @@ public abstract class DtoEntity {
     private String id;
     private Timestamp createDateTime;
 
+    public DtoEntity() {
+    }
+
     public DtoEntity(String id, Timestamp createDateTime) {
         this.id = id;
         this.createDateTime = createDateTime;

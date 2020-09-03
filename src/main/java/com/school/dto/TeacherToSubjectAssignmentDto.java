@@ -2,24 +2,27 @@ package com.school.dto;
 
 import java.util.List;
 
-public class TeacherToSubjectAssignmentDto extends DtoEntity {
+public class TeacherToSubjectAssignmentDto {
 
-    private String email;
+    private String teacherEmail;
     private List<String> schoolClassIdList;
     private String subjectId;
 
-    public TeacherToSubjectAssignmentDto(String email, List<String> schoolClassIdList, String subjectId) {
-        this.email = email;
+    public TeacherToSubjectAssignmentDto() {
+    }
+
+    public TeacherToSubjectAssignmentDto(String teacherEmail, List<String> schoolClassIdList, String subjectId) {
+        this.teacherEmail = teacherEmail;
         this.schoolClassIdList = schoolClassIdList;
         this.subjectId = subjectId;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTeacherEmail() {
+        return teacherEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTeacherEmail(String teacherEmail) {
+        this.teacherEmail = teacherEmail;
     }
 
     public List<String> getSchoolClassIdList() {

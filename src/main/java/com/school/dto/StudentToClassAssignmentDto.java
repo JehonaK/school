@@ -2,20 +2,23 @@ package com.school.dto;
 
 public class StudentToClassAssignmentDto {
 
-    private String email;
+    private String studentEmail;
     private String schoolClassId;
 
-    public StudentToClassAssignmentDto(String email, String schoolClassId) {
-        this.email = email;
+    public StudentToClassAssignmentDto() {
+    }
+
+    public StudentToClassAssignmentDto(String studentEmail, String schoolClassId) {
+        this.studentEmail = studentEmail;
         this.schoolClassId = schoolClassId;
     }
 
-    public String getEmail() {
-        return email;
+    public String getStudentEmail() {
+        return studentEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
     }
 
     public String getSchoolClassId() {
