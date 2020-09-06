@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("subject")
-public class SubjectController {
+public class SubjectController extends BaseController {
 
     private SubjectServiceImpl subjectServiceImpl;
 

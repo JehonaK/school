@@ -1,7 +1,10 @@
 package com.school.dto;
 
+import com.school.annotations.ApiEntity;
+
 import java.sql.Timestamp;
 
+@ApiEntity
 public abstract class DtoEntity {
 
     private String id;

@@ -1,6 +1,7 @@
 package com.school.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.school.annotations.ApiEntity;
 import com.school.type.SubjectType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@ApiEntity
 public class Subject extends BaseEntity<String>{
 
     @Column(name = "name")
