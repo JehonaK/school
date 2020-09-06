@@ -1,5 +1,8 @@
 package com.school.dto;
 
+import com.school.annotations.ApiEntity;
+
+@ApiEntity
 public class StudentToClassAssignmentDto {
 
     private String studentEmail;

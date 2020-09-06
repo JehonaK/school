@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("schoolClass")
-public class SchoolClassController {
+public class SchoolClassController extends BaseController {
     private SchoolClassServiceImpl schoolClassService;
 
     public SchoolClassController(SchoolClassServiceImpl schoolClassService) {

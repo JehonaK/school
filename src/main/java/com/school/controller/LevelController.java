@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("level")
-public class LevelController {
+public class LevelController extends BaseController {
     private LevelServiceImpl levelServiceImpl;
 
     public LevelController(LevelServiceImpl levelService) {

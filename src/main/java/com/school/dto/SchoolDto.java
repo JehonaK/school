@@ -1,8 +1,11 @@
 package com.school.dto;
 
+import com.school.annotations.ApiEntity;
+
 import java.sql.Timestamp;
 import java.util.List;
 
+@ApiEntity
 public class SchoolDto extends DtoEntity {
 
     private String name;

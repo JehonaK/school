@@ -2,6 +2,7 @@ package com.school.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.school.annotations.ApiEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Data
 @Entity
+@ApiEntity
 public class Level extends BaseEntity<String>{
 
     @Column(name = "name")

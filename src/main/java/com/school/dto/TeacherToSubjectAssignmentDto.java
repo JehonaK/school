@@ -1,7 +1,10 @@
 package com.school.dto;
 
+import com.school.annotations.ApiEntity;
+
 import java.util.List;
 
+@ApiEntity
 public class TeacherToSubjectAssignmentDto {
 
     private String teacherEmail;

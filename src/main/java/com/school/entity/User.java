@@ -1,6 +1,7 @@
 package com.school.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.school.annotations.ApiEntity;
 import lombok.Data;
 import org.hibernate.boot.jaxb.hbm.internal.CacheAccessTypeConverter;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@ApiEntity
 public class User extends BaseEntity<String> {
 
     @Column(name = "first_name")
