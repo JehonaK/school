@@ -17,12 +17,6 @@ public class ProducerConfiguration {
         return new Jackson2JsonMessageConverter();
     }
 
-//    private MessageConverter messageConverter;
-//
-//    public ProducerConfiguration(MessageConverter messageConverter) {
-//        this.messageConverter = messageConverter;
-//    }
-
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
