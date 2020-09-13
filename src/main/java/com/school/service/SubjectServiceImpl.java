@@ -6,6 +6,8 @@ import com.school.entity.Level;
 import com.school.entity.SchoolClass;
 import com.school.entity.Subject;
 import com.school.entity.User;
+import com.school.integration.models.SerializableTeacherSubjectConnection;
+import com.school.integration.producers.TeacherSubjectConnectionProducer;
 import com.school.repository.BaseRepository;
 import com.school.repository.SubjectRepository;
 import org.springframework.stereotype.Service;
@@ -22,16 +24,16 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject, String> impleme
     private SchoolClassServiceImpl schoolClassService;
     private UserServiceImpl userService;
     private LevelServiceImpl levelService;
-//    private TeacherSubjectConnectionProducer producer;
+    private TeacherSubjectConnectionProducer teacherSubjectConnectionProducer;
 
     public SubjectServiceImpl(BaseRepository<Subject, String> baseRepository, SubjectRepository subjectRepository, SchoolClassServiceImpl schoolClassService,
-                              UserServiceImpl userService, LevelServiceImpl levelService/*, TeacherSubjectConnectionProducer producer*/) {
+                              UserServiceImpl userService, LevelServiceImpl levelService, TeacherSubjectConnectionProducer teacherSubjectConnectionProducer) {
         super(baseRepository);
         this.subjectRepository = subjectRepository;
         this.schoolClassService = schoolClassService;
         this.userService = userService;
         this.levelService = levelService;
-//        this.producer = producer;
+        this.teacherSubjectConnectionProducer = teacherSubjectConnectionProducer;
     }
 
     @Override
@@ -58,7 +60,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject, String> impleme
             students.addAll(schoolClass.getStudents());
         }
         ArrayList<String> studentIdList = (ArrayList<String>) students.stream().map(User::getId).collect(Collectors.toList());
-        // producer.sendTeacherSubjectConnection(new SerializableTeacherSubjectConnection(courseName, teacher.getId(), studentIdList));
+        teacherSubjectConnectionProducer.sendTeacherSubjectConnection(new SerializableTeacherSubjectConnection(courseName, teacher.getId(), studentIdList));
         // notify teacher by email
     }
 
